@@ -2,20 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Code;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string $code
+ */
 class StatisticRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,8 +17,9 @@ class StatisticRequest extends FormRequest
      */
     public function rules()
     {
+        $codes = array_map(fn(Code $code) => $code->value, Code::cases());
         return [
-            //
+            'code' => 'required|string|in:' . implode(',', $codes),
         ];
     }
 }
