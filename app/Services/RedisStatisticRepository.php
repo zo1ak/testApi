@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\Code;
 use Illuminate\Support\Facades\Redis;
 
 class RedisStatisticRepository implements IStatisticRepository
@@ -13,8 +14,8 @@ class RedisStatisticRepository implements IStatisticRepository
         return (array) Redis::hgetall(self::KEY_NAME);
     }
 
-    public function incByCode(string $code): void
+    public function incByCode(Code $code): void
     {
-        Redis::hincrby(self::KEY_NAME, $code, 1);
+        Redis::hincrby(self::KEY_NAME, $code->value, 1);
     }
 }

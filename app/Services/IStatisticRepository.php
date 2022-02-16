@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Enums\Code;
+
 interface IStatisticRepository
 {
     /**
@@ -10,8 +12,8 @@ interface IStatisticRepository
     public function getList(): array;
 
     /**
-     * @param string $code
+     * @param Code $code
      * @return void
      */
-    public function incByCode(string $code): void;
+    public function incByCode(Code $code): void;
 }

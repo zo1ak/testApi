@@ -2,6 +2,7 @@
 
 namespace App\Commands;
 
+use App\Enums\Code;
 use App\Http\Requests\StatisticRequest;
 
 class Increment extends StatisticCommand
@@ -9,7 +10,8 @@ class Increment extends StatisticCommand
 
     public function exec(?StatisticRequest $request): bool
     {
-        $this->statistic->incByCode($request->code);
+        $code = Code::from($request->code);
+        $this->statistic->incByCode($code);
         return true;
     }
 }

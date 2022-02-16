@@ -22,4 +22,11 @@ class StatisticRequest extends FormRequest
             'code' => 'required|string|in:' . implode(',', $codes),
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'code' => strtolower($this->code),
+        ]);
+    }
 }
